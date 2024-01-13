@@ -1,4 +1,5 @@
 import math
+import cols
 
 class ROW:
     def __init__(self, t):
@@ -28,7 +29,7 @@ class ROW:
         for col in data.cols.x.values():
             v = self.cells[col.at]
             if v != '?':
-                inc  = self.like(v, prior)
+                inc  = col.like(v, prior)
                 out += math.log(inc)
         return math.exp(1) ** out
     
