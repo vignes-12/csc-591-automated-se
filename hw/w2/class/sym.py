@@ -27,8 +27,8 @@ class SYM:
 
         return e
     
-    def small(self):
-        return 0
+    # def small(self):
+    #     return 0
     
     # TODO - Implement the docstring to use the like function
     # def like(self, x, prior):
