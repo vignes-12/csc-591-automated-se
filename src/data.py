@@ -5,7 +5,7 @@ from config import l
 
 class DATA:
     def __init__(self, src, fun=None):
-        self.rows = {}
+        self.rows = []
         self.cols = None
 
         if isinstance(src, str):
@@ -15,7 +15,7 @@ class DATA:
                     self.add(x, fun)
         
         else:
-            for idx, x in enumerate(src) if src else {}:
+            for x in src.values() if src else {}:
                 self.add(x, fun)
     
     def add(self, t, fun, row=None):

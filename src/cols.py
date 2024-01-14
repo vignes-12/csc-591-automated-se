@@ -1,14 +1,14 @@
 import re
-import num
-import sym
+from num import NUM
+from sym import SYM
 
 class COLS:
     def __init__(self, row):
-        x, y, all = [], [], {}
+        x, y, all = {}, {}, {}
         klass, col = 0, 0
-        for at, txt in row.cells.items():
-            col = num(txt, at) if re.finditer("^[A-Z]", txt) else sym(txt, at)
-            all.append(col)
+        for at, txt in enumerate(row.cells):
+            col = NUM(txt, at) if re.finditer("^[A-Z]", txt) else SYM(txt, at)
+            all[at] = col
             if not re.finditer("X$", txt):
                 if re.finditer("!$", txt):
                     klass = col
@@ -16,7 +16,7 @@ class COLS:
         self.x, self.y, self.all, self.klass, self.names = x, y, all, klass, row.cells
 
     def add(self, row):
-        for _, cols in [self.x, self.y]:
+        for cols in [self.x, self.y]:
             for _, col in cols.items():
                 col.add(row.cells[col.at])
         return row

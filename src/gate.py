@@ -14,4 +14,3 @@ if __name__ == "__main__":
             "cohen": args.cohen
         }
         data = DATA(the["file"])
-        print(data.small())
