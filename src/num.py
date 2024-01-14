@@ -1,4 +1,6 @@
 class NUM:
+
+    # Create
     def __init__(self, s=" ", n=0):
 
         self.txt = s
@@ -10,6 +12,7 @@ class NUM:
         self.lo = 1E30
         self.heaven = 0 if (s).startswith("-") else 1
 
+    # Update
     def add(self, x, d):
         if x != "?":
             self.n = self.n+1
@@ -19,19 +22,21 @@ class NUM:
             self.lo = min(x, self.lo)
             self.hi = max(x, self.hi)
 
+    # Query
     def mid(self):
         return self.mu
 
     def div(self):
         return 0 if self.n < 2 else (self.m2/(self.n - 1))**0.5
 
-    # pending implemnetaiton of the config file
+    # TODO pending Implementation of the config file
     # def small(self):
     #     return the.cohen * self.div()
 
     def norm(self, x):
         return x if x == "?" else (x - self.lo)/(self.hi - self.lo + 1E-30)
 
+    # Likelihood
     def like(self, x, _, nom, denom):
         mu, sd = self.mid(), (self.div() + 1E-30)
         nom = 2.718**(-0.5 * (x - mu)**2 / (sd ** 2))
