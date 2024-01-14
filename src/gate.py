@@ -1,9 +1,5 @@
 from config import parse_args, the
-from num import NUM
-from sym import SYM
 from data import DATA
-from row import ROW
-from cols import COLS
 
 if __name__ == "__main__":
     args = parse_args()
@@ -14,3 +10,5 @@ if __name__ == "__main__":
             "cohen": args.cohen
         }
         data = DATA(the["file"])
+        result = data.stats(cols='y', fun="mid", ndivs=2, u={})
+        print(result)

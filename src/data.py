@@ -1,7 +1,7 @@
 from row import ROW
 from cols import COLS
 import csv
-from config import l
+import l
 
 class DATA:
     def __init__(self, src, fun=None):
@@ -53,14 +53,13 @@ class DATA:
 
     #     return ROW(u)
     
-    # def stats(self, cols, fun, ndivs, u):
-    #     u = {[".N"] : len(self.rows)}
+    def stats(self, cols, fun, ndivs, u):
+        u = {".N" : len(self.rows)}
 
-    #     for col in self.cols[cols].values if self.cols[cols] else self.cols["y"]:
-    #         # u[col.txt] = l.rnd(getmetatable(col)[fun or "mid"](col), ndivs) TODO: Figure this out once config is created
-    #         pass
+        for col in getattr(self.cols, cols or "y"):
+            u[(col.txt,)] = l.rnd(getattr(col, fun or "mid")(), ndivs) # TODO: Figure this out once config is created
 
-    #     return u        
+        return u        
     
     # def gate(self, budget0, budget, some):
     #     rows, lite, dark = 0
