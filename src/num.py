@@ -1,3 +1,6 @@
+from config import the
+
+
 class NUM:
 
     # Create
@@ -30,8 +33,8 @@ class NUM:
         return 0 if self.n < 2 else (self.m2/(self.n - 1))**0.5
 
     # TODO pending Implementation of the config file
-    # def small(self):
-    #     return the.cohen * self.div()
+    def small(self):
+        return the.cohen * self.div()
 
     def norm(self, x):
         return x if x == "?" else (x - self.lo)/(self.hi - self.lo + 1E-30)
