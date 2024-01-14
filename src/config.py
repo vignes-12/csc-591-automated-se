@@ -1,6 +1,8 @@
-b4 = {}
-for k, _ in globals().items():
-    b4[k] = k
+import argparse
+
+# b4 = {}
+# for k, _ in globals().items():
+#     b4[k] = k
 
 l = []
 the = []
@@ -24,19 +26,33 @@ OPTIONS:
 
 '''
 
-# TODO refer tricks.py for help
+def parse_args():
+    parser = argparse.ArgumentParser(description="Read CSV and print statistics")
+    parser.add_argument("-c", "--cohen", help='small effect size', required=False, default=0.35)
+    parser.add_argument("-f", "--file", help="CSV data file name", required=True, default="../data/diabetes.csv")
+    # parser.add_argument("-h", "--help", help="show help", required=False, default=False)
+    parser.add_argument("-k", "--k", help="low class frequency kludge", required=False, default=1)
+    parser.add_argument("-m", "--m", help="low attribute frequency kludge", required=False, default=2)
+    parser.add_argument("-s", "--seed", help="random number seed", required=False, default=23408)
+    parser.add_argument("-t", "--type", help="start up action", required=False, default="help")
 
-# TODO - Do we need this ?
-# Seed = 23408
+    args = parser.parse_args()
 
-# TODO - Not sure if this is correct
+    return args
+
+# # TODO refer tricks.py for help
+
+# # TODO - Do we need this ?
+# # Seed = 23408
+
+# # TODO - Not sure if this is correct
 
 
-def isa(x, y):
-    return type(y)(x)
+# def isa(x, y):
+#     return type(y)(x)
 
 
-def isclass(s, t):
-    t = {'a': s}
-    t['__index'] = t
-    return t
+# def isclass(s, t):
+#     t = {'a': s}
+#     t['__index'] = t
+#     return t

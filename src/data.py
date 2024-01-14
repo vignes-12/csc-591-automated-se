@@ -1,26 +1,25 @@
-import row as ROW 
-import cols as COLS
+from row import ROW
+from cols import COLS
 import csv
+from config import l
 
 class DATA:
-    def __init__(self, src, fun):
+    def __init__(self, src, fun=None):
         self.rows = {}
         self.cols = None
 
-        if type(src) == "class 'str'":
+        if isinstance(src, str):
             with open(src, "r") as input_data:
                 csv_reader = csv.reader(input_data)
                 for x in csv_reader:
                     self.add(x, fun)
         
         else:
-            for x in src.values() if src else {}:
+            for idx, x in enumerate(src) if src else {}:
                 self.add(x, fun)
-        
-        return self
     
-    def add(self, t, fun, row):
-        row = t if t.cells else ROW(t)
+    def add(self, t, fun, row=None):
+        row = t.cells if hasattr(t, 'cells') else ROW(t)
 
         if self.cols:
             if fun:

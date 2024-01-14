@@ -13,7 +13,7 @@ class NUM:
         self.m2 = 0
         self.hi = -1E30
         self.lo = 1E30
-        self.heaven = 0 if (s).startswith("-") else 1
+        self.heaven = 0 if s.startswith("-") else 1
 
     # Update
     def add(self, x, d):
