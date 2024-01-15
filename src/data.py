@@ -54,7 +54,7 @@ class DATA:
     #         u.append(col.small())
 
     #     return ROW(u)
-    def stats(self, cols, fun, ndivs, u):
+    def stats(self, cols='y', fun='mid', ndivs=2, u={}):
         u = {".N": len(self.rows)}
         for _, col in self.cols.all.items():
             if cols == 'y' or (cols and col.txt == cols):

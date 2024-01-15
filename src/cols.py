@@ -10,9 +10,9 @@ class COLS:
             col = NUM(txt, at) if re.match("^[A-Z]", txt) else SYM(txt, at)
             all_cols[at] = col
             if not txt.endswith("$"):
-                if re.search("[!+−]$", txt):
+                if re.search("[!+-]$", txt):
                     y[at] = col
-                elif not txt.endswith("X") and not re.search("[!+−]$", txt):
+                elif not txt.endswith("X") and not re.search("[!+-]$", txt):
                     x[at] = col
         self.x, self.y, self.all, self.klass, self.names = x, y, all_cols, klass, row.cells
 
