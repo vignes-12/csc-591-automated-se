@@ -11,3 +11,17 @@ if __name__ == "__main__":
 
     elif args.type == "all":
         eg.all()
+
+    if args.type == "independent":
+        independent_result = eg.independent()
+        print(independent_result)
+
+    elif args.type == "columns":
+        columns_result = eg.columns()
+        print(columns_result)
+
+    elif args.type == "dependent":
+        dependent_result = eg.dependent()
+        print(dependent_result)
+
+
