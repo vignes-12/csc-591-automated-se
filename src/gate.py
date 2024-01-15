@@ -10,6 +10,6 @@ if __name__ == "__main__":
             "cohen": args.cohen
         }
         data = DATA(the["file"])
-        print("Data Cols: ", data.cols.y)
+        # print("Data Cols: ", data.cols.y)
         result = data.stats(cols='y', fun="mid", ndivs=2, u={})
         print(result)

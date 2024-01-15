@@ -12,13 +12,13 @@ class SYM:
     def add(self, x):
         if x != "?":
             self.n = self.n + 1
-            self.has[x] = 1 + (self.has[x] or 0)
+            self.has[x] = self.has.get(x, 0) + 1
 
             if self.has[x] > self.most:
                 self.most, self.mode = self.has[x], x
     
     def mid(self):
-        return self.mode
+        return float(self.mode) if self.mode.isdigit() else 0
     
     def div(self, e):
         e = 0

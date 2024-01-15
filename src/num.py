@@ -17,7 +17,7 @@ class NUM:
 
     # Update
     def add(self, x):
-        print(x)
+        # print(x)
         if x != "?":
             self.n = self.n+1
             d = float(x) - self.mu
@@ -28,7 +28,7 @@ class NUM:
 
     # Query
     def mid(self):
-        return self.mu
+        return float(self.mu)
 
     def div(self):
         return 0 if self.n < 2 else (self.m2/(self.n - 1))**0.5

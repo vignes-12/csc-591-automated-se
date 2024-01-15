@@ -33,7 +33,7 @@ class DATA:
         u= {}
 
         for col in cols.items() if cols else self.cols.all.items():
-            print("hit in mid")
+            # print("hit in mid")
             u.append(col.mid())
         
         return ROW(u)
@@ -42,7 +42,7 @@ class DATA:
         u= {}
 
         for col in cols.items() if cols else self.cols.all.items():
-            print("hit in div")
+            # print("hit in div")
             u.append(col.div())
         
         return ROW(u)
@@ -60,7 +60,8 @@ class DATA:
             if cols == 'y' or (cols and col.txt == cols):
                 value = getattr(col, fun or "mid", lambda x: x.mid)()
                 u[col.txt] = l.rnd(value, ndivs)
-        return u
+        filtered_cols = {key: value for key, value in u.items() if key.endswith('!') or key.endswith('+') or key.endswith('-') or key == ".N"}
+        return filtered_cols
     
     # def gate(self, budget0, budget, some):
     #     rows, lite, dark = 0
