@@ -27,5 +27,3 @@ class COLS:
                 print("Row: ", row.cells)
                 col.add(row.cells[col.at])
         return row
-
-        

@@ -11,5 +11,5 @@ if __name__ == "__main__":
         }
         data = DATA(the["file"])
         print("Data Cols: ", data.cols.y)
-        result = data.stats(cols='y', fun="mid()", ndivs=2, u={})
+        result = data.stats(cols='y', fun="mid", ndivs=2, u={})
         print(result)

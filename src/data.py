@@ -54,28 +54,13 @@ class DATA:
     #         u.append(col.small())
 
     #     return ROW(u)
-    
     def stats(self, cols, fun, ndivs, u):
-        u = {".N" : len(self.rows)}
-
-        # for col in getattr(self.cols, cols or "y"):
-        #     u[(col.txt,)] = l.rnd(getattr(col, fun)(), ndivs) # TODO: Figure this out once config is created
-
-        # for col in self.cols[cols].items() if self.cols[cols] else self.cols["y"].items():
-        #     u[col.txt] = l.rnd( getattr(col)[fun or "mid"](col), ndivs)
-        print(cols)
-
-        for col in self.cols.get(cols or "y", []): # TODO: GET THIS WORKING; this should work but the self.cols.get() isn't correct
-                                                   # we need a way to index the columns in self.cols to access either what's passed
-                                                   # into the cols parameter or default to "y", but I haven't been able to figure it out.
-            value = getattr(type(col), fun or "mid")(col)
-            u[col.txt] = l.rnd(value, ndivs)
-        # for col in self.cols.y :
-        #     col_fun = getattr(col, fun or "mid")
-            
-        #     if col_fun:
-        #         u[col.txt] = l.rnd(col_fun, ndivs)
-        # return u        
+        u = {".N": len(self.rows)}
+        for _, col in self.cols.all.items():
+            if cols == 'y' or (cols and col.txt == cols):
+                value = getattr(col, fun or "mid", lambda x: x.mid)()
+                u[col.txt] = l.rnd(value, ndivs)
+        return u
     
     # def gate(self, budget0, budget, some):
     #     rows, lite, dark = 0
