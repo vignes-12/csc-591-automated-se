@@ -33,6 +33,7 @@ class DATA:
         u= {}
 
         for col in cols.items() if cols else self.cols.all.items():
+            print("hit in mid")
             u.append(col.mid())
         
         return ROW(u)
@@ -41,6 +42,7 @@ class DATA:
         u= {}
 
         for col in cols.items() if cols else self.cols.all.items():
+            print("hit in div")
             u.append(col.div())
         
         return ROW(u)
@@ -57,9 +59,17 @@ class DATA:
         u = {".N" : len(self.rows)}
 
         for col in getattr(self.cols, cols or "y"):
-            u[(col.txt,)] = l.rnd(getattr(col, fun or "mid")(), ndivs) # TODO: Figure this out once config is created
+            u[(col.txt,)] = l.rnd(getattr(col, fun)(), ndivs) # TODO: Figure this out once config is created
 
-        return u        
+        # for col in self.cols[cols].items() if self.cols[cols] else self.cols["y"].items():
+        #     u[col.txt] = l.rnd( getattr(col)[fun or "mid"](col), ndivs)
+        print(cols)
+        # for col in self.cols.y :
+        #     col_fun = getattr(col, fun or "mid")
+            
+        #     if col_fun:
+        #         u[col.txt] = l.rnd(col_fun, ndivs)
+        # return u        
     
     # def gate(self, budget0, budget, some):
     #     rows, lite, dark = 0

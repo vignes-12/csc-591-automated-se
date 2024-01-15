@@ -16,14 +16,15 @@ class NUM:
         self.heaven = 0 if s.startswith("-") else 1
 
     # Update
-    def add(self, x, d):
+    def add(self, x):
+        print(x)
         if x != "?":
             self.n = self.n+1
-            d = x - self.mu
+            d = float(x) - self.mu
             self.mu = self.mu + d/self.n
-            self.m2 = self.m2 + d*(x - self.mu)
-            self.lo = min(x, self.lo)
-            self.hi = max(x, self.hi)
+            self.m2 = self.m2 + d*(float(x) - self.mu)
+            self.lo = min(float(x), self.lo)
+            self.hi = max(float(x), self.hi)
 
     # Query
     def mid(self):
