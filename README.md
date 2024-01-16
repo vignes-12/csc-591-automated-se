@@ -28,4 +28,4 @@ CSC 591 Automated Software Engineering Homeworks - Spring 2024
 🗑️ Replanned   - Reformation of task structure, reassigned or broken down <be>
 
 ## Deadlines
-* HW2 - ** T Jan 16 @ 11:59 PM **
+* HW2 - **T Jan 16 @ 11:59 PM**
