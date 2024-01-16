@@ -6,7 +6,7 @@ import ast
 def stats():
     data = DATA("../data/auto93.csv")
     result = l.sort_string(l.o(data.stats()))
-    # print(result)
+    print(result)
     result_bool = result == "{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}"
     return result_bool
 
@@ -46,7 +46,7 @@ def all(bad=0):
     bad = 0
     for k in l.keys(globals()):
         if k != "all":
-            print(k)
+            # print(k)
             if run_test(k) == False:
                 bad += 1
         
