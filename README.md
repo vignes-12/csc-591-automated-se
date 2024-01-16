@@ -4,16 +4,19 @@ CSC 591 Automated Software Engineering Homeworks - Spring 2024
 ## Tasks - HW2
 | Task | Assignee(s) | Deadline | Date Completed | Status | Est. Hours | Actual Hours |
 |------|----------|----------|--------------|---------|------------|--------------|
-| Review Lua Code | Vignes, Jash, Zeiad | Jan 12 @ 11 PM | --- | ⚠️ In Progress | 4 | --- |
-| Complete assigned reading (appendix/pgs 4-15) | Vignes, Jash, Zeiad | Jan 12 @ 11 PM | --- | ⚠️ In Progress | 2 | --- |
-| Implement NUM class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Implement SYM class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Implement COLS class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Implement DATA class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Implement ROW class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Create config file | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Create testing suite of 10 tests (min) | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
-| Deliver solution to main branch | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ❌ Not Started | 2 | --- |
+| Create Project Management Plan | Zeiad | Jan 12 @ 11 PM | Jan 12 @ 6 PM | ✅ Done | 1 | 0.5 |
+| Review Lua Code | Vignes, Jash, Zeiad | Jan 12 @ 11 PM | Jan 12 @ 8 PM | ✅ Done | 4 | 2 |
+| Complete assigned reading (appendix/pgs 4-15) | Vignes, Jash, Zeiad | Jan 12 @ 11 PM | Jan 12 @ 8 PM | ✅ Done | 2 | 2 |
+| Implement NUM class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 13 @ 11 AM | ✅ Done | 2 | 1.5 |
+| Implement SYM class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 13 @ 12 PM | ✅ Done | 2 | 1.5 |
+| Implement COLS class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 13 @ 1 PM | ✅ Done | 2 | 2 |
+| Implement DATA class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 13 @ 5 PM | ✅ Done | 2 | 2 |
+| Implement ROW class | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 13 @ 5 PM | ✅ Done | 2 | 0.25 |
+| Create config file | Vignes | Jan 15 @ 11 PM | Jan 14 @ 12 PM | ✅ Done | 2 | 2.5 |
+| Create testing suite of 10 tests (min) | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 15 @ 7 PM | ✅ Done | 2 | 2 |
+| Set up GitHub Actions | Jash | Jan 15 @ 11 PM | Jan 15 @ 7 PM | ✅ Done | 1 | 1 |
+| Add Test Teardown | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 15 @ 10 PM | ✅ Done | 0.5 | 0.5 |
+| Deliver solution to main branch | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ⚠️ In Progress | 2 | --- |
 
 
 
