@@ -37,7 +37,6 @@ jobs:
         - name: Run Tests - New
           run: python src/test.py
         
-        - name: Run Tests
-          run: python src/eg.py  
+        
 
     
