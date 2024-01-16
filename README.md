@@ -15,6 +15,7 @@ CSC 591 Automated Software Engineering Homeworks - Spring 2024
 | Create config file | Vignes | Jan 15 @ 11 PM | Jan 14 @ 12 PM | ✅ Done | 2 | 2.5 |
 | Create testing suite of 10 tests (min) | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 15 @ 7 PM | ✅ Done | 2 | 2 |
 | Set up GitHub Actions | Jash | Jan 15 @ 11 PM | Jan 15 @ 7 PM | ✅ Done | 1 | 1 |
+| Add Test Teardown | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | Jan 15 @ 10 PM | ✅ Done | 0.5 | 0.5 |
 | Deliver solution to main branch | Vignes, Jash, Zeiad | Jan 15 @ 11 PM | --- | ⚠️ In Progress | 2 | --- |
 
 
@@ -27,4 +28,4 @@ CSC 591 Automated Software Engineering Homeworks - Spring 2024
 🗑️ Replanned   - Reformation of task structure, reassigned or broken down <be>
 
 ## Deadlines
-* HW2 - ** T Jan 16 @ 11:59 PM **
+* HW2 - **T Jan 16 @ 11:59 PM**

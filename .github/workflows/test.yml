@@ -1,0 +1,42 @@
+name: Python Tests
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Tests every 15 minutes
+
+  push:
+    branches:
+      - main
+      - dev
+  pull_request: 
+    branches:
+        - main
+        - dev  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        
+        - name: Set up Python  
+          uses: actions/setup-python@v2
+          with:
+            python-version: 3.11
+        
+        - name: Install pre-commit
+          run: |
+            pip install pre-commit
+            pre-commit install
+        
+        - name: Run pre-commit checks
+          run: pre-commit run --all-files
+            
+        - name: Run Tests - New
+          run: python src/test.py
+        
+        
+
+    
