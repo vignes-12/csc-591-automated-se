@@ -2,6 +2,7 @@ import re
 from num import NUM
 from sym import SYM
 
+
 class COLS:
     def __init__(self, row):
         x, y, all_cols = {}, {}, {}

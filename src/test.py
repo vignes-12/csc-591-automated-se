@@ -9,7 +9,18 @@ from config import the
 from sym import SYM
 
 
-class TestDataStats(unittest.TestCase):
+class TestBase(unittest.TestCase):
+    @classmethod
+    def setUp(cls):
+        the["seed"] = 23456  # Resetting Seed
+        the["cache"] = {}   # Resetting config cache
+
+    def tearDown(cls):
+        the["seed"] = None
+        the["cache"] = None
+
+
+class TestDataStats(TestBase):
 
     def setUp(self):
         self.data = DATA("../data/auto93.csv")
@@ -20,7 +31,7 @@ class TestDataStats(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
 
-class TestDataColumns(unittest.TestCase):
+class TestDataColumns(TestBase):
 
     def setUp(self):
         self.data = DATA("../data/auto93.csv")
@@ -31,7 +42,7 @@ class TestDataColumns(unittest.TestCase):
         self.assertEqual(actual, expected)
 
 
-class TestDataDependent(unittest.TestCase):
+class TestDataDependent(TestBase):
 
     def setUp(self):
         self.data = DATA("../data/auto93.csv")
@@ -42,7 +53,7 @@ class TestDataDependent(unittest.TestCase):
         self.assertEqual(actual, expected)
 
 
-class TestDataIndependent(unittest.TestCase):
+class TestDataIndependent(TestBase):
 
     def setUp(self):
         self.data = DATA("../data/auto93.csv")
@@ -53,7 +64,7 @@ class TestDataIndependent(unittest.TestCase):
         self.assertEqual(actual, expected)
 
 
-class TestNum(unittest.TestCase):
+class TestNum(TestBase):
 
     def setUp(self):
         self.num_obj = NUM()
@@ -72,7 +83,7 @@ class TestNum(unittest.TestCase):
         self.assertEqual(self.num_obj.div(), 0)
 
 
-class TestSYM(unittest.TestCase):
+class TestSYM(TestBase):
 
     def setUp(self):
         self.sym_obj = SYM()
