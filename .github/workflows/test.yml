@@ -29,6 +29,6 @@ jobs:
           run: python src/eg_2.py
         
         - name: Run Tests
-          run: python src/eg.py  
+          run: python src/test.py  
 
     
