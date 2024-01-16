@@ -26,9 +26,9 @@ jobs:
             python-version: 3.11
           
         - name: Run Tests - New
-          run: python src/eg_2.py
+          run: python src/test.py
         
         - name: Run Tests
-          run: python src/test.py  
+          run: python src/eg.py  
 
     
