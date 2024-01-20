@@ -14,10 +14,11 @@ def learn(data, row, my, kl):
     my.datas[kl] = my.datas[kl] or DATA(data.cols.names)
     my.datas[kl].add(row)
 
-
-# def bayes():
-#     wme = {acc=0, datas={}, tries=0, n=0}
-
+def bayes():
+    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    data = DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme)) #TODO: Fix the parameters for learn??
+    print(wme["acc"] / wme["tries"])
+    return wme["acc"] / wme["tries"] > 0.72
 
 def stats():
     data = DATA("../data/auto93.csv")
@@ -56,6 +57,8 @@ def run_test(test_name):
         return dependent()
     if test_name == "independent":
         return independent()
+    if test_name == "bayes":
+        return bayes()
     
 
 def all(bad=0):
