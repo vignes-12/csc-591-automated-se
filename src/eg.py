@@ -3,6 +3,23 @@ import l
 import sys
 import ast
 
+def learn(data, row, my, kl):
+    my.n += 1
+    kl = row.cells[data.cols.klass.at]
+
+    if my.n > 10:
+        my.tries += 1
+        my.acc += 1 if kl == row.likes(my.datas) else 0
+    
+    my.datas[kl] = my.datas[kl] or DATA(data.cols.names)
+    my.datas[kl].add(row)
+
+def bayes():
+    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    data = DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme)) #TODO: Fix the parameters for learn??
+    print(wme["acc"] / wme["tries"])
+    return wme["acc"] / wme["tries"] > 0.72
+
 def stats():
     data = DATA("../data/auto93.csv")
     result = l.sort_string(l.o(data.stats()))
@@ -40,6 +57,8 @@ def run_test(test_name):
         return dependent()
     if test_name == "independent":
         return independent()
+    if test_name == "bayes":
+        return bayes()
     
 
 def all(bad=0):
