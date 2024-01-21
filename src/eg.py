@@ -8,7 +8,7 @@ import ast
 def stats():
     data = DATA("../data/auto93.csv")
     result = l.sort_string(l.o(data.stats()))
-    print(f"Stats: {result}\n")
+    print(f"\nStats: {result}\n")
     result_bool = result == "{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}"
     return result_bool
 
