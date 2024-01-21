@@ -7,7 +7,7 @@ from num import NUM
 def task_1(dataset):
     # for row in dataset.rows:
     #         print(row.cells)
-    for col in weather.cols.all: #weatherClassCount += 1 #print("Column: ", weather.cols.x[col].txt)
+    for col in weather.cols.x: #weatherClassCount += 1 #print("Column: ", weather.cols.x[col].txt)
         # print(f"{weather.cols.x[col].txt}'s Numbers: {weather.cols.x[col].has}")
         print(f"{weather.cols.all[col].txt:>28}")
         print("============================")
@@ -34,6 +34,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for val in classEntryDict.values():
                     print(f"{val:>3}", end="           ")
@@ -60,6 +63,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for val in classEntryDict.values():
                     print(f"{val:>3}", end="           ")
@@ -83,6 +89,9 @@ def task_1(dataset):
                         classEntryDict[class_entry] = 1
                     else:
                         classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for key, val in classEntryDict.items():
                     if(weather.cols.all[col].txt == weather.cols.klass.txt):
@@ -115,6 +124,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for key, val in classEntryDict.items():
                     if(weather.cols.all[col].txt == weather.cols.klass.txt):
@@ -126,9 +138,29 @@ def task_1(dataset):
                         print(f"{val}/{weather.cols.klass.has[key]:<3}", end="         ")
                 print()
         print()
+    for col in weather.cols.y:
+        print(f"{weather.cols.y[col].txt:>28}")
+        print("============================")
+        for klassCategory in weather.cols.klass.has:
+            print(f"{klassCategory:>14}", end="")
+        print("\n")
+        for val in weather.cols.klass.has.values():
+            print(f"{val:>14}", end="")
+        print("\n")
+    print("           -----------------")
+    for col in weather.cols.y:
+        for klassCategory in weather.cols.klass.has:
+            print(f"{klassCategory:>14}", end="")
+        print("\n")
+        for val in weather.cols.klass.has.values():
+            print(f"{val:>11}/{len(dataset.rows)}", end="")
+        print("\n")
+        
 
 
 
-weather = DATA("../data/weather.csv")
+
+
+weather = DATA("../data/diabetes.csv")
 task_1(weather)
 
