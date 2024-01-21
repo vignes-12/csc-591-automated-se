@@ -34,6 +34,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for val in classEntryDict.values():
                     print(f"{val:>3}", end="           ")
@@ -60,6 +63,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for val in classEntryDict.values():
                     print(f"{val:>3}", end="           ")
@@ -83,6 +89,9 @@ def task_1(dataset):
                         classEntryDict[class_entry] = 1
                     else:
                         classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for key, val in classEntryDict.items():
                     if(weather.cols.all[col].txt == weather.cols.klass.txt):
@@ -115,6 +124,9 @@ def task_1(dataset):
                          classEntryDict[class_entry] = 1
                     else:
                          classEntryDict[class_entry] += 1
+                for dep_var in dataset.cols.klass.has:
+                    if dep_var not in classEntryDict:
+                        classEntryDict[dep_var] = 0
                 print(f"{classEntry:<11}", end="")
                 for key, val in classEntryDict.items():
                     if(weather.cols.all[col].txt == weather.cols.klass.txt):
