@@ -9,8 +9,6 @@ class SYM:
         self.has = {}
         self.mode = None
         self.most = 0
-        # really ugly solution right now
-        the['m'] = 2
     
     def add(self, x):
         if x != "?":
