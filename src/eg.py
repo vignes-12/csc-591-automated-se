@@ -4,6 +4,7 @@ from sym import SYM
 import l
 import sys
 import ast
+from config import the
 
 def stats():
     data = DATA("../data/auto93.csv")
@@ -148,3 +149,30 @@ def all(bad=0):
         
     sys.stderr.write(f"{'❌ FAIL' if bad > 0 else '✅ PASS'} {bad} fail(s) \n")
     sys.exit(bad)
+
+def learn(data, row, my):
+    my.n = my.n + 1
+    kl = row.cells[data.colls.klass.at]
+    if my.n > 10:
+        my.tries += 1
+        my.acc = my.acc + (1 if kl == row.likes(my.datas) else 0)
+    my.datas[kl] = my.datas[kl] or DATA(data.cols.names)
+    my.datas[kl].add(row)
+
+def bayes():
+    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme))
+    print(wme.acc/wme.tries)
+    return wme.acc/wme.tries > .72
+
+def km():
+    print("#%4s\t%s\t%s" % ("acc", "k", "m"))
+    k_values = [0, 3, 1]
+    m_values = [0, 3, 1]
+    for k in k_values:
+        for m in m_values:
+            the["k"] = k
+            the["m"] = m
+            wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+            DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
+    print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
