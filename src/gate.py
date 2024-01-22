@@ -19,5 +19,33 @@ if __name__ == "__main__":
 
     elif args.type == "dependent":
         dependent_result = eg.dependent()
+    
+    elif args.type == "num_mean":
+        num_mean_result = eg.num_mean()
 
+    elif args.type == "num_mid":
+        num_mid_result = eg.num_mid()
+    
+    elif args.type == "num_div":
+        num_div_result = eg.num_div()
 
+    elif args.type == "num_like":
+        num_like_result = eg.num_like()
+    
+    elif args.type == "sym_add":
+        sym_add_result = eg.sym_add()
+    
+    elif args.type == "sym_add_mul_val":
+        sym_add_mul_val_result = eg.sym_add_mul_val()
+
+    elif args.type == "sym_mid":
+        sym_mid_result = eg.sym_mid()
+    
+    elif args.type == "sym_like":
+        sym_like_result = eg.sym_like()
+    
+    elif args.type == "bayes":
+        bayes_result = eg.bayes()
+    
+    elif args.type == "km":
+        km_result = eg.km()
