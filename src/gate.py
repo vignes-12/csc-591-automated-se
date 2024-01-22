@@ -49,3 +49,8 @@ if __name__ == "__main__":
     
     elif args.type == "km":
         km_result = eg.km()
+    
+    else:
+        pass
+
+    

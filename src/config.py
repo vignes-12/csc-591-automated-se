@@ -31,7 +31,7 @@ def parse_args():
     parser.add_argument(
         "-c", "--cohen", help='small effect size', required=False, default=0.35)
     parser.add_argument("-f", "--file", help="CSV data file name",
-                        required=True, default="../data/diabetes.csv")
+                        required=False, default="../data/diabetes.csv")
     parser.add_argument("-H", "--Help", help="show help",
                         required=False, default=False)
     parser.add_argument(

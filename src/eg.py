@@ -64,7 +64,7 @@ def num_like():
     num.add(15)
     num.add(25)
     expected = 0.0201
-    actual = num.like(10, None, 0, 0)
+    actual = num.like(10, None)
     print(f"Expected num.like(): near .0208\nActual num.like(): {actual}\n")
     return actual - expected < .001
 
@@ -137,6 +137,10 @@ def run_test(test_name):
         return sym_add_mul_val()
     if test_name == "sym_like":
         return sym_like()
+    if test_name == "bayes":
+        return bayes()
+    if test_name == "km":
+        return km()
     
 
 def all(bad=0):
@@ -151,13 +155,16 @@ def all(bad=0):
     sys.exit(bad)
 
 def learn(data, row, my):
-    my.n = my.n + 1
-    kl = row.cells[data.colls.klass.at]
-    if my.n > 10:
-        my.tries += 1
-        my.acc = my.acc + (1 if kl == row.likes(my.datas) else 0)
-    my.datas[kl] = my.datas[kl] or DATA(data.cols.names)
-    my.datas[kl].add(row)
+    my["n"] = my["n"] + 1
+    kl = row.cells[data.cols.klass.at]
+    if my["n"] > 10:
+        my["tries"] += 1
+        my["acc"] = my["acc"] + (1 if kl == row.likes(my["datas"]) else 0)
+    
+    if kl not in my["datas"]: my['datas'][kl] = DATA(data.cols.names)
+    my['datas'][kl].add(row)
+    # my["datas"][kl] = my["datas"][kl] or DATA(data.cols.names)
+    # my["datas"][kl].add(row)
 
 def bayes():
     wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
