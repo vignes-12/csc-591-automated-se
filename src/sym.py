@@ -1,5 +1,5 @@
-from config import the
 import math
+from config import the
 
 class SYM:
     def __init__(self, s="", n=0):
@@ -9,6 +9,8 @@ class SYM:
         self.has = {}
         self.mode = None
         self.most = 0
+        # really ugly solution right now
+        the['m'] = 2
     
     def add(self, x):
         if x != "?":
@@ -32,4 +34,7 @@ class SYM:
         return 0
     
     def like(self, x, prior):
-        return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
+        try:
+            return ((self.has[x] or 0) + the['m'] * prior) / (self.n + the['m'])
+        except KeyError:
+            return the['m'] * prior / (self.n + the['m'])
