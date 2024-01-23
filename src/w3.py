@@ -6,7 +6,7 @@ from num import NUM
 
 def task_1(dataset):
     
-        # Calculate the maximum length of class names
+    # Calculate the maximum length of class names
     max_class_length = max(len(klassCategory) for klassCategory in dataset.cols.klass.has)
 
     # Print the header
@@ -194,6 +194,6 @@ def task_1(dataset):
 
 
 
-dataset = DATA("../data/diabetes.csv")
-task_1(dataset)
+task_1(DATA("../data/diabetes.csv"))
+task_1(DATA("../data/soybean.csv"))
 
