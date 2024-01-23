@@ -46,6 +46,13 @@ if __name__ == "__main__":
         elif args.type == "sym_mid":
             sym_mid_result = eg.sym_mid()
 
+        elif args.type == "bayes":
+            bayes_result = eg.bayes()
+    
+        elif args.type == "km":
+            km_result = eg.km()
+    
+
         sys.stdout = sys.__stdout__
 
     # source_file = 'w2.out'
@@ -64,6 +71,3 @@ if __name__ == "__main__":
     #     print(f"Error: Permission denied. Make sure you have the necessary permissions.")
     # except Exception as e:
     #     print(f"An error occurred: {e}")
-
-
-

@@ -11,6 +11,8 @@ class COLS:
             col = NUM(txt, at) if re.match("^[A-Z]", txt) else SYM(txt, at)
             all_cols[at] = col
             if not txt.endswith("$"):
+                if txt.endswith("!"):
+                    klass = col
                 if re.search("[!+-]$", txt):
                     y[at] = col
                 elif not txt.endswith("X") and not re.search("[!+-]$", txt):
@@ -18,7 +20,9 @@ class COLS:
         self.x, self.y, self.all, self.klass, self.names = x, y, all_cols, klass, row.cells
 
     def add(self, row):
+        # print("Add in COLS: ", row)
         for cols in [self.x, self.y]:
             for _, col in cols.items():
+                # print("Row in COLS: ", row)
                 col.add(row.cells[col.at])
         return row

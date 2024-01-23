@@ -1,4 +1,5 @@
 import math
+from config import the
 
 class SYM:
     def __init__(self, s="", n=0):
@@ -30,6 +31,10 @@ class SYM:
     def small(self):
         return 0
     
-    # TODO - Implement the docstring to use the like function
-    # def like(self, x, prior):
-    #     return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
+    def like(self, x, prior):
+        try:
+            return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
+        except KeyError:
+            if(self.n == 0):
+                return 0
+            return the.m * prior / (self.n + the.m)
