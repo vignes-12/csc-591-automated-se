@@ -59,7 +59,6 @@ def num_div():
     print(f"Expected num.div: {expected}\nActual num.div: {actual}\n")
     return expected == actual
 
-<<<<<<< HEAD
 def num_like():
     num = NUM()
     num.add(15)
@@ -69,9 +68,6 @@ def num_like():
     print(f"Expected num.like(): near .0208\nActual num.like(): {actual}\n")
     return actual - expected < .001
 
-
-=======
->>>>>>> main
 def sym_add():
     sym = SYM()
     sym.add("A")
@@ -100,7 +96,6 @@ def sym_mid():
     actual = sym.mid()
     print(f"Expected sym.mid: 0\nActual sym.mid: {actual}")
     return expected == actual
-<<<<<<< HEAD
 
 def sym_like():
     sym = SYM()
@@ -113,8 +108,6 @@ def sym_like():
     actual = sym.like("B", .3)
     print (f"Expected sym.like(): .2286\nActual sym.like(): {actual}\n")
     return actual - expected < .0001
-=======
->>>>>>> main
     
     
 
