@@ -1,1 +1,47 @@
-{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}
+Expected number of columns in file: 8
+Actual: 8
+
+Expected number of dependent variables in file: 3
+Actual: 3
+
+Expected number of independent variables in file: 4
+Actual: 4
+
+Expected num.div: 0
+Actual num.div: 0
+
+Expected num.mean: 5
+Actual num.mean: 5.0
+
+Expected num.mid: 7.5
+Actual num.mid: 7.5
+
+
+Stats: {.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}
+
+Expected sym.n: 1
+Actual sym.n: 1
+
+Expected sym.has['A']: 1
+Actual sym.has['A']: 1
+
+Expected sym.mode: "A"
+Actual sym.mode: A
+
+Expected sym.n: 6
+Actual sym.n: 6
+
+Expected sym.has["A"]: 3
+Actual sym.has["A"]: 3
+
+Expected sym.has["B"]: 2
+Actual sym.has["B"]: 2
+
+Expected sym.has["C"]: 1
+Actual sym.has["C"]: 1
+
+Expected sym.mode: "A"
+Actual sym.mode: A
+
+Expected sym.mid: 0
+Actual sym.mid: 0
