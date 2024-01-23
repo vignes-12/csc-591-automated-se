@@ -43,6 +43,6 @@ class NUM:
     # Likelihood
     def like(self, x, _):
         mu, sd = self.mid(), (self.div() + 1E-30)
-        nom = 2.718**(-0.5 * (x - mu)**2 / (sd ** 2))
+        nom = 2.718**(-0.5 * (float(x) - mu)**2 / (sd ** 2))
         denom = (sd * 2.5 + 1E-30)
         return nom/denom

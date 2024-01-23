@@ -33,6 +33,8 @@ class SYM:
     
     def like(self, x, prior):
         try:
-            return ((self.has[x] or 0) + the['m'] * prior) / (self.n + the['m'])
+            return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
         except KeyError:
-            return the['m'] * prior / (self.n + the['m'])
+            if(self.n == 0):
+                return 0
+            return the.m * prior / (self.n + the.m)

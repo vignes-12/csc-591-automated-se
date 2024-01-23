@@ -155,13 +155,17 @@ def all(bad=0):
     sys.exit(bad)
 
 def learn(data, row, my):
+    # print("Inside of learn")
+    # print("My: ", my)
     my["n"] = my["n"] + 1
     kl = row.cells[data.cols.klass.at]
+    # print("KL in Learn: ", kl)
     if my["n"] > 10:
         my["tries"] += 1
         my["acc"] = my["acc"] + (1 if kl == row.likes(my["datas"]) else 0)
     
     if kl not in my["datas"]: my['datas'][kl] = DATA(data.cols.names)
+    # print("MY DATAS: ", my["datas"][kl].cols.names)
     my['datas'][kl].add(row)
     # my["datas"][kl] = my["datas"][kl] or DATA(data.cols.names)
     # my["datas"][kl].add(row)
@@ -169,17 +173,17 @@ def learn(data, row, my):
 def bayes():
     wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
     DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme))
-    print(wme.acc/wme.tries)
-    return wme.acc/wme.tries > .72
+    print(wme["acc"]/wme["tries"])
+    return wme["acc"]/wme["tries"] > .72
 
 def km():
     print("#%4s\t%s\t%s" % ("acc", "k", "m"))
-    k_values = [0, 3, 1]
-    m_values = [0, 3, 1]
+    k_values = [0, 1, 2, 3]
+    m_values = [0, 1, 2, 3]
     for k in k_values:
         for m in m_values:
             the["k"] = k
             the["m"] = m
             wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
             DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
-    print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
+            print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))

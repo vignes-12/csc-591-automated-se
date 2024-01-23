@@ -13,7 +13,7 @@ class ROW:
             d = d + abs(col.heaven - col.norm(self.cells[col.at])) ** 2
         return d ** .5 / n ** .5
     
-    def likes(self, datas, nHypotheses, most, tmp, out): # TODO: Check the parameters for accuracy 
+    def likes(self, datas, most=None): 
         n, nHypotheses = 0, 0
         for k, data in datas.items():
             n += len(data.rows)
@@ -22,7 +22,7 @@ class ROW:
             tmp = self.like(data, n, nHypotheses)
             if most == None or tmp > most:
                 most, out = tmp, k
-        return out, most
+        return out
     
     def like(self, data, n, nHypotheses): 
         prior = (len(data.rows) + the.k) / (n + the.k * nHypotheses)
@@ -31,6 +31,7 @@ class ROW:
             v = self.cells[col.at]
             if v != '?':
                 inc  = col.like(v, prior)
-                out += math.log(inc)
+                if(inc > 0):
+                    out += math.log(inc)
         return math.exp(1) ** out
     
