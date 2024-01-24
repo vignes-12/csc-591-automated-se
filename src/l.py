@@ -1,5 +1,6 @@
 import math
 import ast
+import random
 
 def keys(t, u=None):
     if u is None:
@@ -35,6 +36,32 @@ def o(t, n=2, u=None):
             u.append(f"'{o(k, n)}': {o(t[k], n)}")
 
     return "{" + ", ".join(u) + "}"
+
+def shuffle(t, j):
+    u = {}
+    for x in t.values():
+        u.append(x)
+    
+    for i in range(len(u), 1, -1):
+        j = random.randint(1, i) # Unsure if these are the correct bounds
+        u[i], u[j] = u[j], u[i]
+    
+    return u
+
+def slice(t, go, stop, inc):
+    u = {}
+    if go and go < 0:
+        go += len(t)
+    
+    if stop and stop < 0:
+        stop += len(t)
+
+    for j in range((go or 1) - 1, stop or len(t), inc or 1): # Range values may need to be modified
+        u.append(t[j])
+    
+    return u
+    
+        
 
 def sort_string(input_string):
     input_dict = ast.literal_eval(input_string)

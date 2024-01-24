@@ -20,9 +20,7 @@ class COLS:
         self.x, self.y, self.all, self.klass, self.names = x, y, all_cols, klass, row.cells
 
     def add(self, row):
-        # print("Add in COLS: ", row)
         for cols in [self.x, self.y]:
             for _, col in cols.items():
-                # print("Row in COLS: ", row)
                 col.add(row.cells[col.at])
         return row

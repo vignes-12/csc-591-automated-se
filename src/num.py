@@ -17,7 +17,6 @@ class NUM:
 
     # Update
     def add(self, x):
-        # print(x)
         if x != "?":
             self.n = self.n+1
             d = float(x) - self.mu
@@ -33,7 +32,7 @@ class NUM:
     def div(self):
         return 0 if self.n < 2 else (self.m2/(self.n - 1))**0.5
 
-    # TODO pending Implementation of the config file
+
     def small(self):
         return the.cohen * self.div()
 

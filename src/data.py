@@ -2,6 +2,7 @@ from row import ROW
 from cols import COLS
 import csv
 import l
+import math
 
 
 class DATA:
@@ -11,15 +12,11 @@ class DATA:
 
         if isinstance(src, str):
             with open(src, "r") as input_data:
-                # print("Beginning of Input Read")
                 csv_reader = csv.reader(input_data)
-                # print("Whole file: ", csv_reader)
                 for x in csv_reader:
-                    # print("X within isInstance: ", x)
                     self.add(x, fun)
 
         else:
-            # print("SRC: ", src)
             # for x in src if src else {}:
             #     print("X: ", x)
             #     self.add(x, fun)
@@ -29,26 +26,20 @@ class DATA:
                 self.add({}, fun)
 
     def add(self, t, fun=None, row=None):
-        # print("T: ", t)
         row = t if hasattr(t, 'cells') else ROW(t)
-        # print("Row: ", row.cells)
 
         if self.cols:
-            # print("Hit in self.cols block")
             if fun:
-                # print("Hit in fun: ", fun)
                 fun(self, row)
 
             self.rows.append(self.cols.add(row))
         else:
-            # print("Hit in Data: COLS(row)")
             self.cols = COLS(row)
 
     def mid(self, cols, u):
         u = {}
 
         for col in cols.items() if cols else self.cols.all.items():
-            # print("hit in mid")
             u.append(col.mid())
 
         return ROW(u)
@@ -57,18 +48,18 @@ class DATA:
         u = {}
 
         for col in cols.items() if cols else self.cols.all.items():
-            # print("hit in div")
             u.append(col.div())
 
         return ROW(u)
 
-    # def small(self, u):
-    #     u = {}
+    def small(self, u):
+        u = {}
 
-    #     for col in self.cols.all.items():
-    #         u.append(col.small())
+        for col in self.cols.all.items():
+            u.append(col.small())
 
-    #     return ROW(u)
+        return ROW(u)
+    
     def stats(self, cols='y', fun='mid', ndivs=2, u={}):
         u = {".N": len(self.rows)}
         for _, col in self.cols.all.items():
@@ -79,15 +70,49 @@ class DATA:
             '!') or key.endswith('+') or key.endswith('-') or key == ".N"}
         return filtered_cols
 
-    # def gate(self, budget0, budget, some):
-    #     rows, lite, dark = 0
-    #     stats, bests = {}
+    def gate(self, budget0, budget, some):
+        stats, bests = {}
 
-    #     rows = l.shuffle
-    #     return 0
+        rows = l.shuffle(self.rows)
+        lite = l.slice(rows, 1, budget0)
+        dark = l.slice(rows, budget0+1) # We'll need to adjust the parameter in the function definition of slice()
 
-    # def split(self, best, rest, lite, dark):
-    #     return 0
+        for i in range(1, budget+1): #Using +1 to include all values in budget
+            best, rest = self.bestRest(lite, (len(lite)) ** some)
+            todo, selected = self.split(best, rest, lite, dark)
+            stats[i] = selected.mid()
+            bests[i] = best.rows[0] #Lua lists are indexed starting at 1, python is 0
+            lite.append(dark.pop(todo))
+        
+        return stats, bests
 
-    # def bestRest(self, rows, want, best, rest, top):
-    #     return 0
+    def split(self, best, rest, lite, dark):
+        selected = DATA(self.cols.names)
+        max = 1E30
+        out = 1
+
+        for i, row in dark.items():
+            b = row.like(best, len(lite), 2)
+            r = row.like(rest, len(lite), 2)
+            
+            if b > r:
+                selected.add(row)
+            
+            tmp = abs(b + r) / abs(b - r + 1E-300)
+
+            if tmp > max:
+                out, max = i, tmp
+
+        return out, selected
+
+    def bestRest(self, rows, want, best, rest, top):
+        rows.sort(key = lambda row: row.d2h(self))
+
+        best, rest = self.cols.names
+
+        for i, row in rows.items():
+            if i <= want:
+                best.append(row)
+            else:
+                rest.append(row)
+        return DATA(best), DATA(rest)
