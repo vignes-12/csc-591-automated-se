@@ -77,11 +77,11 @@ class DATA:
         lite = l.slice(rows, 1, budget0)
         dark = l.slice(rows, budget0+1) # We'll need to adjust the parameter in the function definition of slice()
 
-        for i in range(1, budget+1): #Using +1 to include all values in budget
-            best, rest = self.bestRest(lite, (len(lite)) ** some)
+        for i in range(budget): #Using +1 to include all values in budget
+            best, rest = self.bestRest(lite, len(lite) ** some)
             todo, selected = self.split(best, rest, lite, dark)
-            stats[i] = selected.mid()
-            bests[i] = best.rows[0] #Lua lists are indexed starting at 1, python is 0
+            stats.append(selected.mid())
+            bests.append(best.rows[0]) #Lua lists are indexed starting at 1, python is 0
             lite.append(dark.pop(todo))
         
         return stats, bests
@@ -91,7 +91,7 @@ class DATA:
         max = 1E30
         out = 1
 
-        for i, row in dark.items():
+        for i, row in enumerate(dark):
             b = row.like(best, len(lite), 2)
             r = row.like(rest, len(lite), 2)
             
@@ -105,12 +105,12 @@ class DATA:
 
         return out, selected
 
-    def bestRest(self, rows, want, best, rest, top):
+    def bestRest(self, rows, want, best, rest, top=None):
         rows.sort(key = lambda row: row.d2h(self))
 
         best, rest = self.cols.names
 
-        for i, row in rows.items():
+        for i, row in enumerate(rows):
             if i <= want:
                 best.append(row)
             else:
