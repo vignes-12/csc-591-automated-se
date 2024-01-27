@@ -71,17 +71,44 @@ class DATA:
         return filtered_cols
 
     def gate(self, budget0, budget, some):
-        stats, bests = {}
+        stats, bests = {}, {}
+
+        self.rows = l.shuffle(self.rows)
+        
+        top6 = self.rows[:6]
+        print("1. top6")
+        for row in top6:
+            print(row.cells)
+
+        top50 = self.rows[:50]
+        print("2. top50")
+        for row in top50:
+            print(row.cells)
+
+        # Not working past this point
+
+        rows_d2h = []
+        for row in self.rows:
+            rows_d2h.append(row.d2h(data=DATA("../data/diabetes.csv")))
+        rows_d2h.sort()
+        print("3. most", rows_d2h[0])
 
         rows = l.shuffle(self.rows)
         lite = l.slice(rows, 1, budget0)
         dark = l.slice(rows, budget0+1) # We'll need to adjust the parameter in the function definition of slice()
 
         for i in range(budget): #Using +1 to include all values in budget
+            lite_d2h = []
+            for row in lite:
+                lite_d2h.append(row.d2h(data=DATA("../data/diabetes.csv")))
+            lite_d2h.sort()
             best, rest = self.bestRest(lite, len(lite) ** some)
             todo, selected = self.split(best, rest, lite, dark)
             stats.append(selected.mid())
             bests.append(best.rows[0]) #Lua lists are indexed starting at 1, python is 0
+            print("4: rand", self.cols.y[l.rnd(0, len(dark))])
+            print("5: mid", selected.mid().y)
+            print("6: top", bests[-1].y)
             lite.append(dark.pop(todo))
         
         return stats, bests
