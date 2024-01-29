@@ -10,5 +10,6 @@ SOME = 0.5
 
 for i in range(20):
     random.seed(i)
-    data = DATA("../data/diabetes.csv")
+    data = DATA("../data/auto93.csv")
+    print("Seed No: ", i)
     data.gate(budget0=BUDGET0, budget=BUDGET, some=SOME)
