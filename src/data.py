@@ -89,9 +89,9 @@ class DATA:
 
         rows_d2h = []
         for row in self.rows:
-            rows_d2h.append(row.d2h(data=DATA("../data/diabetes.csv")))
-        rows_d2h.sort()
-        print("3. most", rows_d2h[0])
+            rows_d2h.append((row.d2h(data=DATA("../data/auto93.csv")), row))
+        rows_d2h = sorted(rows_d2h, key = lambda x: x[0])
+        print("3. most", rows_d2h[0][1].cells)
 
         rows = l.shuffle(self.rows)
         lite = l.slice(rows, 1, budget0)
@@ -100,8 +100,8 @@ class DATA:
         for i in range(budget): #Using +1 to include all values in budget
             lite_d2h = []
             for row in lite:
-                lite_d2h.append(row.d2h(data=DATA("../data/diabetes.csv")))
-            lite_d2h.sort()
+                lite_d2h.append((row.d2h(data=DATA("../data/auto93.csv")), row))
+            lite_d2h = sorted(lite_d2h, key = lambda x: x[0])
             best, rest = self.bestRest(lite, len(lite) ** some)
             todo, selected = self.split(best, rest, lite, dark)
             stats.append(selected.mid())
@@ -112,6 +112,7 @@ class DATA:
             lite.append(dark.pop(todo))
         
         return stats, bests
+    
 
     def split(self, best, rest, lite, dark):
         selected = DATA(self.cols.names)
@@ -132,7 +133,7 @@ class DATA:
 
         return out, selected
 
-    def bestRest(self, rows, want, best, rest, top=None):
+    def bestRest(self, rows, want, best=None, rest=None, top=None):
         rows.sort(key = lambda row: row.d2h(self))
 
         best, rest = self.cols.names
