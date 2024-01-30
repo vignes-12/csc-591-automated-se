@@ -47,20 +47,3 @@ if __name__ == "__main__":
     elif args.type == "km":
         km_result = eg.km()
     
-
-    # source_file = 'w2.out'
-    # destination_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'hw', 'w2', 'w2.out')
-
-    # # Construct the destination path
-    # destination_path = os.path.join(destination_directory, source_file)
-
-    # try:
-    #     # Copy the file to the destination directory
-    #     shutil.copy(source_file, destination_path)
-    #     print(f"File '{source_file}' copied to '{destination_path}' successfully.")
-    # except FileNotFoundError:
-    #     print(f"Error: File '{source_file}' not found.")
-    # except PermissionError:
-    #     print(f"Error: Permission denied. Make sure you have the necessary permissions.")
-    # except Exception as e:
-    #     print(f"An error occurred: {e}")

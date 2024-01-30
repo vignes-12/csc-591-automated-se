@@ -6,11 +6,11 @@ class ROW:
     def __init__(self, t):
         self.cells = t
 
-    def d2h(self, data, d, n):
+    def d2h(self, data, d=None, n=None):
         d, n = 0, 0
         for col in data.cols.y.values():
             n += 1
-            d = d + abs(col.heaven - col.norm(self.cells[col.at])) ** 2
+            d = d + abs(col.heaven - col.norm(float(self.cells[col.at]))) ** 2
         return d ** .5 / n ** .5
     
     def likes(self, datas, most=None): 

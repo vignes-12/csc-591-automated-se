@@ -146,7 +146,6 @@ def all(bad=0):
     bad = 0
     for k in l.keys(globals()):
         if k != "all":
-            # print(k)
             if run_test(k) == False:
                 bad += 1
         
@@ -154,20 +153,14 @@ def all(bad=0):
     sys.exit(bad)
 
 def learn(data, row, my):
-    # print("Inside of learn")
-    # print("My: ", my)
     my["n"] = my["n"] + 1
     kl = row.cells[data.cols.klass.at]
-    # print("KL in Learn: ", kl)
     if my["n"] > 10:
         my["tries"] += 1
         my["acc"] = my["acc"] + (1 if kl == row.likes(my["datas"]) else 0)
     
     if kl not in my["datas"]: my['datas'][kl] = DATA(data.cols.names)
-    # print("MY DATAS: ", my["datas"][kl].cols.names)
     my['datas'][kl].add(row)
-    # my["datas"][kl] = my["datas"][kl] or DATA(data.cols.names)
-    # my["datas"][kl].add(row)
 
 def bayes():
     wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}

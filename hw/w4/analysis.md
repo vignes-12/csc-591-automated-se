@@ -1,0 +1,9 @@
+# Q1: Does SMO do better than the random baselines (see prints 1,2,4)?
+Analyzing our output, we can see that Sequential Model Optimization is **better** at making predictions than random baselines. The results that we were seeking to optimize were `lbs`, `acc`, and `mpg` columns. As we see, the SMO we've built has proven better results than the random baselines. On average, our Sequential Model Optimization had **lower** values than the baselines for the `lbs` category, meaning that the SMO did a better job than the randomized baseline. The SMO minimized the lbs category to about **2400**, whereas the randomized baseline was closer to **2800**. Similarly, the output collected shows that the SMO did better at maximizing the `acc` and `mpg` categories than the random baselines. This difference was slightly more nuanced in the acc category but much more evident in the mpg category. **Our Sequential Model Optimization has outperformed the random baselines on all three metrics we were measuring.**
+
+
+# Q2: How many y row evaluations are required for print 3?
+The number of y row evaluations needed for print 3 would be (the number of y columns) * (the number of rows in the dataset itself - 1), since that is what would be needed to go through the entire dataset, calculate the lowest d2h for each y value, and then compare them with each datapoint to determine the top value in the dataset.
+
+# Q3: How does SMO do compared to absolute best (print 3)
+SMO does not fare better than the absolute best. While some rows have higher values in lbs, acc, or mpg, none have higher values in all three than the absolute best. This makes sense as the absolute best is the closest to the ideal statistically as determined by d2h.
