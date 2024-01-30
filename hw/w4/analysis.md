@@ -6,3 +6,4 @@ Analyzing our output, we can see that Sequential Model Optimization is **better*
 The number of y row evaluations needed for print 3 would be (the number of y columns) * (the number of rows in the dataset itself - 1), since that is what would be needed to go through the entire dataset, calculate the lowest d2h for each y value, and then compare them with each datapoint to determine the top value in the dataset.
 
 # Q3: How does SMO do compared to absolute best (print 3)
+SMO does not fare better than the absolute best. While some rows have higher values in lbs, acc, or mpg, none have higher values in all three than the absolute best. This makes sense as the absolute best is the closest to the ideal statistically as determined by d2h.
