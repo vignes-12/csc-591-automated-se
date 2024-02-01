@@ -1,6 +1,8 @@
 import math
 import ast
 import random
+from config import *
+from itertools import chain, combinations
 
 def keys(t, u=None):
     if u is None:
@@ -41,6 +43,7 @@ def shuffle(t):
     u = t.copy()
     random.shuffle(u)
     return u
+
 # def shuffle(t, j):
 #     u = []
 #     for x in t.values():
@@ -70,10 +73,71 @@ def slice(t, go=None, stop=None, inc=None):
 
     return u
     
-        
-
 def sort_string(input_string):
     input_dict = ast.literal_eval(input_string)
     sorted_dict = dict(sorted(input_dict.items()))
     output_string = str(sorted_dict).replace("'","")
     return output_string
+
+def entropy(t):
+    n = 0
+    for v in t.values():
+        n += v
+    e = 0
+    for v in t.values():
+        e = e - v / n * math.log(v/n, 2)
+    return e, n
+
+def keysort(t, fun):
+    u = [{'x': x, 'y': fun(x)} for x in t]
+    u.sort(key=lambda a: a['y'])
+    v = [xy['x'] for xy in u]
+    return v
+
+def any(t):
+    return random.choice(t)
+
+def many(t, n=None):
+    if n is None:
+        n = len(t)
+    u = []
+    for _ in range(n):
+        u.append(any(t))
+    return u
+
+def score(t, goal, LIKE, HATE):
+    like, hate, tiny = 0, 0, 1E-30
+    for klass, n in enumerate(t):
+        if klass == goal:
+            like += n
+        else:
+            hate += n
+    like, hate = like / (LIKE + tiny), hate / (HATE + tiny)
+    if hate > like:
+        return 0
+    else:
+        like ** the.Support / (like + hate)
+
+def powerset(s):
+    t = [[]]
+    for item in s:
+        new_subsets = []
+        for subset in t:
+            new_subset = [item] + subset
+            new_subsets.append(new_subset)
+        t.extend(new_subsets)
+    return t
+
+def asList(t):
+    u = []
+    for v in t:
+        u.append(v)
+    return u
+
+def copy(t):
+    if not isinstance(t, dict):
+        return t
+    u = {}
+    for k, v in t.items():
+        u[copy(k)] = copy(v)
+    return u
