@@ -44,6 +44,7 @@ class NUM:
         x, y = self.norm(x), self.norm(y)
         if x == "?":
             x = 1 if y < .5 else 0
+        if y == "?":
             y = 1 if x < .5 else 0
         return abs(x - y)
     

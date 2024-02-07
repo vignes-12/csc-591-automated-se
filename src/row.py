@@ -11,7 +11,7 @@ class ROW:
     def d2h(self, data):
         d, n, p = 0, 0, 2
 
-        for col in data.cols.y:
+        for col in data.cols.y.values():
             x = self.cells.get(col.at)
             if x is None:
                 print("?", end="", file=sys.stderr)

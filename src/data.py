@@ -69,13 +69,13 @@ class DATA:
             '!') or key.endswith('+') or key.endswith('-') or key == ".N"}
         return filtered_cols
     
-    def clone(self, rows, new):
+    def clone(self, rows):
         new = DATA(self.cols.names)
         for row in rows or []:
             new.add(row)
         return new
     
-    def farapart(self, sortp, rows, a=None, b=None, far=None, evals=None):
+    def farapart(self, rows, sortp=None, a=None, b=None, far=None, evals=None):
         far = int(len(rows) * the.Far)
         evals = 1 if a else 2
         if a is None:
@@ -90,7 +90,7 @@ class DATA:
         some = l.many(rows, min(the.Half, len(rows)))
         a, b, C, evals = self.farapart(some, sortp, before)
         def d(row1, row2):
-            return row1.dist(row1, self)
+            return row1.dist(row2, self)
         def project(r):
             return (d(r, a) ** 2 + C ** 2 - d(r, b) ** 2) / (2 * C)
         as_, bs = {}, {}
@@ -101,7 +101,7 @@ class DATA:
                 bs.append(row)
         return as_, bs, a, b, C, d(a, bs[0]), evals
     
-    def tree(self, sortp, _tree, evals=None, evals1=None):
+    def tree(self, sortp, _tree, evals1=None):
         evals = 0
         def _tree(data, above):
             nonlocal evals1
