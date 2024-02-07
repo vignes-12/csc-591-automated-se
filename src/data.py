@@ -1,7 +1,7 @@
 from row import ROW
 from cols import COLS
 import csv
-import l
+import l as lib
 import random
 from config import *
 from node import NODE
@@ -79,7 +79,7 @@ class DATA:
         far = int(len(rows) * the.Far)
         evals = 1 if a else 2
         if a is None:
-            a = l.any(rows).neighbors(self, rows)[far]
+            a = lib.any(rows).neighbors(self, rows)[far]
         if b is None:
             b = a.neighbors(self, rows)[far]
         if (sortp and b.d2h(self) < a.d2h(self)):

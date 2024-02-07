@@ -12,12 +12,12 @@ class ROW:
         d, n, p = 0, 0, 2
 
         for col in data.cols.y.values():
-            x = self.cells.get(col.at)
+            x = self.cells[col.at]#.get(col.at)
             if x is None:
                 print("?", end="", file=sys.stderr)
             else:
                 n += 1
-                d += math.pow(abs(col.heaven - col.norm(self.cells.get(col.at))), p)
+                d += math.pow(abs(col.heaven - col.norm(self.cells[col.at])), p) #removed the .get(col.at)
         
         if n == 0:
             return 0
@@ -32,10 +32,10 @@ class ROW:
         return math.pow(d / n, 1 / p)
     
     def neighbors(self, data, rows=None):
-        if rows in None:
+        if rows is None:
             rows = data.rows
         
-        return l.keysort(rows, key=lambda row: self.dist(row, data))
+        return l.keysort(rows, lambda row: self.dist(row, data))
         
     # def d2h(self, data, d=None, n=None):
     #     d, n = 0, 0

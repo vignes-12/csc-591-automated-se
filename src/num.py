@@ -36,7 +36,7 @@ class NUM:
         return the.cohen * self.div()
 
     def norm(self, x):
-        return x if x == "?" else (x - self.lo)/(self.hi - self.lo + 1E-30)
+        return x if x == "?" else (float(x) - self.lo)/(self.hi - self.lo + 1E-30)
 
     def dist(self, x, y):
         if (x == "?" and y == "?"):
@@ -46,11 +46,11 @@ class NUM:
             x = 1 if y < .5 else 0
         if y == "?":
             y = 1 if x < .5 else 0
-        return abs(x - y)
+        return abs(float(x) - float(y))
     
     def bin(self, x):
         tmp = (self.hi - self.lo) / (the.bins - 1)
-        return 1 if self.hi == self.lo else math.floor(x / tmp + .5) * tmp
+        return 1 if self.hi == self.lo else math.floor(float(x) / tmp + .5) * tmp
     
     # # Likelihood
     # def like(self, x, _):
