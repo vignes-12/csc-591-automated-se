@@ -2,6 +2,7 @@ from config import *
 from data import DATA
 
 def sorted():
+  print("Sorted: ")
   dataset = DATA("../data/auto93.csv")
   firstRow = dataset.rows[0]
   neighbors = firstRow.neighbors(dataset)
@@ -11,6 +12,7 @@ def sorted():
       print(f"{(i+1): <8} {row.cells} {firstRow.dist(row, dataset):10.2f}")
 
 def far():
+  print("Far: ")
   dataset = DATA("../data/auto93.csv")
 
   a, b, C, evals = dataset.farapart(dataset.rows)
@@ -20,4 +22,5 @@ def far():
   print("Evaluations: ", evals)
 
 sorted()
+print()
 far()
