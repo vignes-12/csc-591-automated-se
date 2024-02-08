@@ -1,5 +1,6 @@
 import math
 from config import the
+import l
 
 class SYM:
     def __init__(self, s="", n=0):
@@ -22,19 +23,29 @@ class SYM:
         return float(self.mode) if self.mode.isdigit() else 0
     
     def div(self, e):
-        e = 0
-        for v in self.has.values():
-            e = e - v / self.n * math.log(v / self.n, 2)
+        return l.entropy(self.has)
+        # e = 0
+        # for v in self.has.values():
+        #     e = e - v / self.n * math.log(v / self.n, 2)
 
         return e
     
     def small(self):
         return 0
     
-    def like(self, x, prior):
-        try:
-            return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
-        except KeyError:
-            if(self.n == 0):
-                return 0
-            return the.m * prior / (self.n + the.m)
+    def norm(self, x):
+        return x
+    
+    def dist(self, x, y):
+        return 1 if (x == "?" and y == "?") else 0 if x == y else 1
+    
+    def bin(self, x):
+        return x
+    
+    # def like(self, x, prior):
+    #     try:
+    #         return ((self.has[x] or 0) + the.m * prior) / (self.n + the.m)
+    #     except KeyError:
+    #         if(self.n == 0):
+    #             return 0
+    #         return the.m * prior / (self.n + the.m)
