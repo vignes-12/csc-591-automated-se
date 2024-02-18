@@ -11,7 +11,7 @@ def keys(t, u=None):
         u.append(k)
     return u
 
-def rnd(n, ndecs):
+def rnd(n, ndecs=None):
     if isinstance(n, int):
         return n
     if math.floor(n) == n:
