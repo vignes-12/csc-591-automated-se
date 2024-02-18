@@ -19,6 +19,10 @@ def rnd(n, ndecs):
     mult = 10 ** (ndecs or 2)
     return math.floor(n * mult + 0.5) / mult
 
+def oo(x):
+    print(o(x))
+    return x
+
 def o(t, n=2, u=None):
     if isinstance(t, (int, float)):
         return str(rnd(t, n))

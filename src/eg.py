@@ -108,8 +108,78 @@ def sym_like():
     actual = sym.like("B", .3)
     print (f"Expected sym.like(): .2286\nActual sym.like(): {actual}\n")
     return actual - expected < .0001
+
+def learn(data, row, my):
+    my["n"] = my["n"] + 1
+    kl = row.cells[data.cols.klass.at]
+    if my["n"] > 10:
+        my["tries"] += 1
+        my["acc"] = my["acc"] + (1 if kl == row.likes(my["datas"]) else 0)
     
+    if kl not in my["datas"]: my['datas'][kl] = DATA(data.cols.names)
+    my['datas'][kl].add(row)
+
+def bayes():
+    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+    DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme))
+    print(wme["acc"]/wme["tries"])
+    return wme["acc"]/wme["tries"] > .72
+
+def km():
+    print("#%4s\t%s\t%s" % ("acc", "k", "m"))
+    k_values = [0, 1, 2, 3]
+    m_values = [0, 1, 2, 3]
+    for k in k_values:
+        for m in m_values:
+            the["k"] = k
+            the["m"] = m
+            wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
+            DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
+            print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
+
+def sorted():
+    print("Sorted: ")
+    dataset = DATA("../data/auto93.csv")
+    firstRow = dataset.rows[0]
+    neighbors = firstRow.neighbors(dataset)
+
+    for i, row in enumerate(neighbors):
+        if i % 30 == 0:
+            print(f"{(i+1): <8} {row.cells} {firstRow.dist(row, dataset):10.2f}")
     
+def far():
+    print("Far: ")
+    dataset = DATA("../data/auto93.csv")
+
+    a, b, C, evals = dataset.farapart(dataset.rows)
+    print("far1: ", a.cells)
+    print("far2: ", b.cells)
+    print(f"distance = {C:.2f}")
+    print("Evaluations: ", evals)
+    
+def half():
+    dataset = DATA("../data/auto93.csv")
+    lefts, rights, left, right, C, cut = dataset.half(dataset.rows)
+    o = l.o
+    print(o(len(lefts)), o(len(rights)), o(left.cells), o(right.cells), o(C), o(cut))
+
+def tree():
+    t, evals = DATA("../data/auto93.csv").tree(True)
+    t.show()
+    print(evals)
+
+def branch():
+    dataset = DATA("../data/auto93.csv")
+    best, rest, evals = dataset.branch()
+    print(l.o(best.mid().cells), l.o(rest.mid().cells))
+    print(evals)
+
+def doubletap():
+    dataset = DATA("../data/auto93.csv")
+    best1, rest, evals1 = dataset.branch(32)
+    best2, _, evals2 = best1.branch(4)
+    print(l.o(best2.mid().cells), l.o(rest.mid().cells))
+    print(evals1+evals2)
 
 def run_test(test_name):
     if test_name == "stats":
@@ -151,31 +221,3 @@ def all(bad=0):
         
     sys.stderr.write(f"{'❌ FAIL' if bad > 0 else '✅ PASS'} {bad} fail(s) \n")
     sys.exit(bad)
-
-def learn(data, row, my):
-    my["n"] = my["n"] + 1
-    kl = row.cells[data.cols.klass.at]
-    if my["n"] > 10:
-        my["tries"] += 1
-        my["acc"] = my["acc"] + (1 if kl == row.likes(my["datas"]) else 0)
-    
-    if kl not in my["datas"]: my['datas'][kl] = DATA(data.cols.names)
-    my['datas'][kl].add(row)
-
-def bayes():
-    wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
-    DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme))
-    print(wme["acc"]/wme["tries"])
-    return wme["acc"]/wme["tries"] > .72
-
-def km():
-    print("#%4s\t%s\t%s" % ("acc", "k", "m"))
-    k_values = [0, 1, 2, 3]
-    m_values = [0, 1, 2, 3]
-    for k in k_values:
-        for m in m_values:
-            the["k"] = k
-            the["m"] = m
-            wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
-            DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
-            print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
