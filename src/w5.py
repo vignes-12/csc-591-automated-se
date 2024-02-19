@@ -1,5 +1,6 @@
 from config import *
 from data import DATA
+import eg
 
 def sorted():
   print("Sorted: ")
@@ -21,6 +22,16 @@ def far():
   print(f"distance = {C:.2f}")
   print("Evaluations: ", evals)
 
+def rrp():
+    data = DATA("../data/auto93.csv")
+    node, evals = data.tree(True)
+    node.show()
+    print("evals: ", evals)
+
 sorted()
 print()
 far()
+
+rrp()
+
+eg.doubletap()

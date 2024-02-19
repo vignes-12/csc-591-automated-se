@@ -11,13 +11,17 @@ def keys(t, u=None):
         u.append(k)
     return u
 
-def rnd(n, ndecs):
+def rnd(n, ndecs=None):
     if isinstance(n, int):
         return n
     if math.floor(n) == n:
         return n
     mult = 10 ** (ndecs or 2)
     return math.floor(n * mult + 0.5) / mult
+
+def oo(x):
+    print(o(x))
+    return x
 
 def o(t, n=2, u=None):
     if isinstance(t, (int, float)):
@@ -36,8 +40,8 @@ def o(t, n=2, u=None):
                 u.append(f"'{o(k, n)}': {o(t[k], n)}")
         else:
             u.append(f"'{o(k, n)}': {o(t[k], n)}")
-
-    return "{" + ", ".join(u) + "}"
+#f'{cell:.2f}' for cell in node.here.mid().cells
+    return "{" + ", ".join([f'{i:.2f}' for i in u]) + "}"
 
 def shuffle(t):
     u = t.copy()
