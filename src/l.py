@@ -40,8 +40,8 @@ def o(t, n=2, u=None):
                 u.append(f"'{o(k, n)}': {o(t[k], n)}")
         else:
             u.append(f"'{o(k, n)}': {o(t[k], n)}")
-
-    return "{" + ", ".join(u) + "}"
+#f'{cell:.2f}' for cell in node.here.mid().cells
+    return "{" + ", ".join([f'{i:.2f}' for i in u]) + "}"
 
 def shuffle(t):
     u = t.copy()

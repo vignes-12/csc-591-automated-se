@@ -77,7 +77,7 @@ class DATA:
     
     def farapart(self, rows, sortp=None, a=None, b=None, far=None, evals=None):
         far = int(len(rows) * the.Far)
-        evals = 1 if a else 2
+        evals = 1 if a and a.cells is None else 2
         if a is None:
             a = lib.any(rows).neighbors(self, rows)[far]
         if b is None:
