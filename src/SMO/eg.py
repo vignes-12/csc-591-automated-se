@@ -177,5 +177,5 @@ def km():
             the["k"] = k
             the["m"] = m
             wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
-            DATA("../../data/soybean.csv", lambda data, t: learn(data, t, wme))
+            DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
             print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))

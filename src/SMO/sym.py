@@ -21,7 +21,7 @@ class SYM:
     def mid(self):
         return float(self.mode) if self.mode.isdigit() else 0
     
-    def div(self, e):
+    def div(self):
         e = 0
         for v in self.has.values():
             e = e - v / self.n * math.log(v / self.n, 2)

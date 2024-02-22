@@ -37,28 +37,37 @@ def o(t, n=2, u=None):
 
     return "{" + ", ".join(u) + "}"
 
-def shuffle(t, j):
-    u = {}
-    for x in t.values():
-        u.append(x)
-    
-    for i in range(len(u), 1, -1):
-        j = random.randint(1, i) # Unsure if these are the correct bounds
-        u[i], u[j] = u[j], u[i]
-    
+def shuffle(t):
+    u = t.copy()
+    random.shuffle(u)
     return u
+# def shuffle(t, j):
+#     u = []
+#     for x in t.values():
+#         u.append(x)
+    
+#     for i in range(len(u) - 1, 0, -1):
+#         j = random.randint(0, i) # Unsure if these are the correct bounds
+#         u[i], u[j] = u[j], u[i]
+    
+#     return u
 
-def slice(t, go, stop, inc):
-    u = {}
-    if go and go < 0:
+def slice(t, go=None, stop=None, inc=None):
+    if go is not None and go < 0:
         go += len(t)
     
-    if stop and stop < 0:
+    if stop is not None and stop < 0:
         stop += len(t)
 
-    for j in range((go or 1) - 1, stop or len(t), inc or 1): # Range values may need to be modified
+    u = []
+
+    go = int(go) if go is not None else 1
+    stop = int(stop) if stop is not None else len(t)
+    inc = int(inc) if inc is not None else 1
+
+    for j in range(go, stop, inc):
         u.append(t[j])
-    
+
     return u
     
         
