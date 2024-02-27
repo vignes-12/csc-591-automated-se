@@ -1,6 +1,8 @@
 from data import DATA
 from datetime import datetime
+from row import ROW
 import eg
+import random
 
 def part1(filename, seed, repeats):
     data = DATA(filename)
@@ -27,18 +29,32 @@ def part1(filename, seed, repeats):
     print("#")
 
     for i in range(20):
-        stats, bests = data.gate(budget0=9, budget=4, some=0.5)
+        stats, bests = data.gate(budget0=4, budget=9, some=0.5)
+        best = bests[-1]
         print(f"{'smo9':<30} [", end="")
-        for cell in bests[0].cells:
+        for cell in best.cells:
             print(f"{cell:<13}", end="")
-        print(f"]    ") # TODO: D2H VALUES NEED TO BE CALCULATED
-        # print("{:<30} {:<50} {:>15}".format("smo9", result, result.d2h(result)))
+        print(f"]     {best.d2h(data):.2f}") 
 
     print("#")
 
     for i in range(20):
-        pass
-        # Need to implement the random 50
+        selectRows = random.sample(data.rows, 50)
+        minRow = min(selectRows, key=lambda row:row.d2h(data))
+
+        print(f"{'any50':<30} [", end="")
+        for cell in minRow.cells:
+            print(f"{cell:<13}", end="")
+        print(f"]     {minRow.d2h(data):.2f}")
+    
+    print("#")
+
+    globalMin = min(data.rows, key=lambda row: row.d2h(data))
+    print(f"{'100%':<30} [", end="")
+    for cell in globalMin.cells:
+        print(f"{cell:<13}", end="")
+    print(f"]     {globalMin.d2h(data):.2f}")
+
 
 filename = "../../data/auto93.csv"
 repeats = 20
