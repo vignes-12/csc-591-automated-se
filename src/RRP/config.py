@@ -35,6 +35,8 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Read CSV and print statistics")
     parser.add_argument(
+       "-B", "-Beam", help="max number of ranges", required=False, default=10)
+    parser.add_argument(
         "-c", "--cohen", help='small effect size', required=False, default=0.35)
     parser.add_argument("-f", "--file", help="CSV data file name",
                         required=False, default="../data/diabetes.csv")
