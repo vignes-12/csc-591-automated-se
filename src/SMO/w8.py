@@ -1,8 +1,10 @@
+from itertools import chain
 from data import DATA
 from datetime import datetime
 from row import ROW
 import eg
 import random
+import stats
 
 
 def std(data):
@@ -15,6 +17,7 @@ def std(data):
 
 
 def part1(filename, seed, repeats):
+    random.seed(seed)
     data = DATA(filename)
     # something ova here
     print("date :", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
@@ -67,6 +70,7 @@ def part1(filename, seed, repeats):
 
 
 def part2(filename, seed, repeats):
+    random.seed(seed)
     data = DATA(filename)
 
     print("date :", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
@@ -80,22 +84,64 @@ def part2(filename, seed, repeats):
 
     print("#base", end =" ")
     #base
+    base_d2h = [x.d2h(data) for x in data.rows]
+    # sample = stats.SAMPLE(base_d2h)
+    # print(sample.bar(sample))
     print("#bonr9", end =" ")
     #bonr9
+    bonr9_d2h = [x.d2h(data) for x in chain.from_iterable(data.gate(4, 5, 0.5))]
+
     print("#rand9", end =" ")
     #rand9
+    rand9_d2h = []
+    for i in range(9):
+        orig = data.rows
+        data.rows = random.sample(data.rows, int(len(data.rows) * 0.1))
+        rand9_d2h.append(min([x.d2h(data) for x in data.rows]))
+        data.rows = orig
     print("#bonr15", end =" ")
     #bonr15
+    bonr15_d2h = [x.d2h(data) for x in chain.from_iterable(data.gate(4, 11, 0.5))]
     print("#rand15", end =" ")
     #rand15
+    rand15_d2h = []
+    for i in range(15):
+        orig = data.rows
+        data.rows = random.sample(data.rows, int(len(data.rows) * 0.1))
+        rand15_d2h.append(min([x.d2h(data) for x in data.rows]))
+        data.rows = orig
     print("#bonr20", end =" ")
     #bonr20
+    bonr20_d2h = [x.d2h(data) for x in chain.from_iterable(data.gate(4, 16, 0.5))]
     print("#rand20", end =" ")
     #rand20
+    rand20_d2h = []
+    for i in range(20):
+        orig = data.rows
+        data.rows = random.sample(data.rows, int(len(data.rows) * 0.1))
+        rand20_d2h.append(min([x.d2h(data) for x in data.rows]))
+        data.rows = orig
     print("#rand358", end =" ")
     #rand358
-
+    rand358_d2h = []
+    for i in range(358):
+        orig = data.rows
+        data.rows = random.sample(data.rows, int(len(data.rows) * 0.1))
+        rand358_d2h.append(min([x.d2h(data) for x in data.rows]))
+        data.rows = orig
+    # putting in stat samples
+    samples = [stats.SAMPLE(base_d2h, "base"),
+               stats.SAMPLE(bonr9_d2h, "#bonr9"),
+               stats.SAMPLE(rand9_d2h, "#rand9"),
+               stats.SAMPLE(bonr15_d2h, "#bonr15"),
+               stats.SAMPLE(rand15_d2h, "#rand15"),
+               stats.SAMPLE(bonr20_d2h, "#bonr20"),
+               stats.SAMPLE(rand20_d2h, "#rand20"),
+               stats.SAMPLE(rand358_d2h, "#rand358")]
+    
     # output stuff
+    print("#report8")
+    stats.eg0(samples)
 
 
 
@@ -107,4 +153,4 @@ filename = "../../data/auto93.csv"
 repeats = 20
 seed = 31210
 part1(filename, seed, repeats)
-#part2(filename, seed, repeats)
+part2(filename, seed, repeats)
