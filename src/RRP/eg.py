@@ -4,6 +4,7 @@ from sym import SYM
 import l
 import sys
 import ast
+import misc
 from config import the
 
 def stats():
@@ -175,11 +176,35 @@ def branch():
     print(evals)
 
 def doubletap():
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
     best1, rest, evals1 = dataset.branch(32)
     best2, _, evals2 = best1.branch(4)
     print(l.o(best2.mid().cells), l.o(rest.mid().cells))
     print(evals1+evals2)
+
+def bins():
+    dataset = DATA("../data/auto93.csv")
+    best, rest = dataset.branch()[:2]
+    like = best.rows
+    hate = l.slice(l.shuffle(rest.rows), 1, 3 * len(like))
+    def score(range):
+        return range.score("like", len(like), len(hate))
+    t = []
+    for col in dataset.cols.x:
+        print()
+        for range in misc._range1(col, {"LIKE":like, "HATE":hate}):
+            l.oo(range)
+            t.append(range)
+    t = sorted(t, key=lambda x: score(x), reverse=True)
+    max = score(t[0])
+    print("\n#scores:\n")
+    for v in l.slice(t, 1, the["B"]):
+        if score(v) > max * 0.1:
+            print(l.rnd(score(v)), l.o(v))
+    l.oo({"LIKE":len(like), "HATE":len(hate)})
+
+    
+
 
 def run_test(test_name):
     if test_name == "stats":
