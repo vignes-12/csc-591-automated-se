@@ -134,7 +134,7 @@ def powerset(s):
 
 def asList(t):
     u = []
-    for v in t:
+    for v in t.values():
         u.append(v)
     return u
 

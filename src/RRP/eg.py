@@ -183,16 +183,17 @@ def doubletap():
     print(evals1+evals2)
 
 def bins():
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
     best, rest = dataset.branch()[:2]
     like = best.rows
     hate = l.slice(l.shuffle(rest.rows), 1, 3 * len(like))
     def score(range):
         return range.score("like", len(like), len(hate))
     t = []
-    for col in dataset.cols.x:
+    for _, col in enumerate(dataset.cols.x):
+        print(col)
         print()
-        for range in misc._range1(col, {"LIKE":like, "HATE":hate}):
+        for range in misc._ranges1(dataset.cols.all[col], {"LIKE":like, "HATE":hate}):
             l.oo(range)
             t.append(range)
     t = sorted(t, key=lambda x: score(x), reverse=True)

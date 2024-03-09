@@ -41,6 +41,7 @@ class RANGE:
         e2, n2 = l.entropy(other.y)
         if n1 <= tooFew or n2 <= tooFew:
             return both
-        if l.entropy(both.y) <= (n1 * e1 + n2 * e2) / (n1 + n2):
+        e, _ = l.entropy(both.y)
+        if e <= (n1 * e1 + n2 * e2) / (n1 + n2):
             return both
     
