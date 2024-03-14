@@ -20,9 +20,10 @@ class SYM:
                 self.most, self.mode = self.has[x], x
     
     def mid(self):
-        return float(self.mode) if self.mode.isdigit() else 0
+        # return float(self.mode) if self.mode.isdigit() else 0
+        return self.mode
     
-    def div(self, e):
+    def div(self):
         return l.entropy(self.has)
         # e = 0
         # for v in self.has.values():

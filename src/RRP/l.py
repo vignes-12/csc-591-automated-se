@@ -12,8 +12,8 @@ def keys(t, u=None):
     return u
 
 def rnd(n, ndecs=None):
-    if isinstance(n, int):
-        return n
+    if isinstance(n, str):
+        return int(n)
     if math.floor(n) == n:
         return n
     mult = 10 ** (ndecs or 2)
@@ -41,7 +41,7 @@ def o(t, n=2, u=None):
         else:
             u.append(f"'{o(k, n)}': {o(t[k], n)}")
 #f'{cell:.2f}' for cell in node.here.mid().cells
-    return "{" + ", ".join([f'{i:.2f}' for i in u]) + "}"
+    return "{" + ", ".join([f'{i}' for i in u]) + "}"
 
 def shuffle(t):
     u = t.copy()
@@ -90,12 +90,13 @@ def entropy(t):
     e = 0
     for v in t.values():
         e = e - v / n * math.log(v/n, 2)
-    return e, n
+    return e
 
 def keysort(t, fun):
     u = [{'x': x, 'y': fun(x)} for x in t]
     u.sort(key=lambda a: a['y'])
     v = [xy['x'] for xy in u]
+    print(v)
     return v
 
 def any(t):
@@ -104,9 +105,12 @@ def any(t):
 def many(t, n=None):
     if n is None:
         n = len(t)
-    u = []
-    for _ in range(n):
-        u.append(any(t))
+    # u = []
+    # for _ in range(n):
+    #     u.append(any(t))
+    u = {}
+    for i in range(n):
+        u[i] = any(t)
     return u
 
 def score(t, goal, LIKE, HATE):

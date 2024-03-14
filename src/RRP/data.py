@@ -64,7 +64,9 @@ class DATA:
         for _, col in self.cols.all.items():
             if cols == 'y' or (cols and col.txt == cols):
                 value = getattr(col, fun or "mid", lambda x: x.mid)()
-                u[col.txt] = l.rnd(value, ndivs)
+                print(type(value))
+                u[col.txt] = lib.rnd(value, ndivs)
+                print(u[col.txt])
         filtered_cols = {key: value for key, value in u.items() if key.endswith(
             '!') or key.endswith('+') or key.endswith('-') or key == ".N"}
         return filtered_cols
@@ -79,15 +81,22 @@ class DATA:
         far = int(len(rows) * the.Far)
         evals = 1 if a and a.cells is None else 2
         if a is None:
+            # Error here!
             a = lib.any(rows).neighbors(self, rows)[far]
         if b is None:
             b = a.neighbors(self, rows)[far]
         if (sortp and b.d2h(self) < a.d2h(self)):
             a, b = b, a
+        
+        # print("a: ", a)
+        # print("b: ", b)
+        # print("Dist: ", a.dist(b, self))
+        # print("Evals: ", evals)
         return a, b, a.dist(b, self), evals
     
-    def half(self, rows, sortp, before, evals=None):
+    def half(self, rows, sortp=None, before=None, evals=None):
         some = lib.many(rows, min(the.Half, len(rows)))
+        print("Hit in data.half")
         a, b, C, evals = self.farapart(some, sortp, before)
         def d(row1, row2):
             return row1.dist(row2, self)
@@ -122,7 +131,9 @@ class DATA:
             if len(data.rows) > stop:
                 lefts, rights, left, _, _, _, _= self.half(data.rows, True, above)
                 evals += 1
-                rest.extend(rights)
+                # rest.extend(rights)
+                for row1 in rights.values():
+                    rest.append(row1)
                 return _branch(data.clone(lefts), left)
             else:
                 return self.clone(data.rows), self.clone(rest), evals

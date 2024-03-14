@@ -5,31 +5,33 @@ import l
 import sys
 import ast
 import misc
+import math
+import random
 from config import the
 
 def stats():
-    data = DATA("../data/auto93.csv")
+    data = DATA("../../data/auto93.csv")
     result = l.sort_string(l.o(data.stats()))
     print(f"\nStats: {result}\n")
     result_bool = result == "{.N: 398, Acc+: 15.57, Lbs-: 2970.42, Mpg+: 23.84}"
     return result_bool
 
 def columns():
-    data = DATA("../data/auto93.csv")
+    data = DATA("../../data/auto93.csv")
     expected = 8
     actual = len(data.cols.all)
     print(f"Expected number of columns in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
 def dependent():
-    data = DATA("../data/auto93.csv")
+    data = DATA("../../data/auto93.csv")
     expected = 3
     actual = len(data.cols.y)
     print(f"Expected number of dependent variables in file: {expected}\nActual: {actual}\n")
     return expected == actual
 
 def independent():
-    data = DATA("../data/auto93.csv")
+    data = DATA("../../data/auto93.csv")
     expected = 4
     actual = len(data.cols.x)
     print(f"Expected number of independent variables in file: {expected}\nActual: {actual}\n")
@@ -122,7 +124,7 @@ def learn(data, row, my):
 
 def bayes():
     wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
-    DATA("../data/diabetes.csv", lambda data, t: learn(data, t, wme))
+    DATA("../../data/diabetes.csv", lambda data, t: learn(data, t, wme))
     print(wme["acc"]/wme["tries"])
     return wme["acc"]/wme["tries"] > .72
 
@@ -135,12 +137,12 @@ def km():
             the["k"] = k
             the["m"] = m
             wme = {"acc": 0, "datas": {}, "tries": 0, "n": 0}
-            DATA("../data/soybean.csv", lambda data, t: learn(data, t, wme))
+            DATA("../../data/soybean.csv", lambda data, t: learn(data, t, wme))
             print("%5.2f\t\%s\t\%s" % (wme["acc"]/wme["tries"], k, m))
 
 def sorted():
     print("Sorted: ")
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
     firstRow = dataset.rows[0]
     neighbors = firstRow.neighbors(dataset)
 
@@ -150,7 +152,7 @@ def sorted():
     
 def far():
     print("Far: ")
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
 
     a, b, C, evals = dataset.farapart(dataset.rows)
     print("far1: ", a.cells)
@@ -159,18 +161,18 @@ def far():
     print("Evaluations: ", evals)
     
 def half():
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
     lefts, rights, left, right, C, cut = dataset.half(dataset.rows)
     o = l.o
     print(o(len(lefts)), o(len(rights)), o(left.cells), o(right.cells), o(C), o(cut))
 
 def tree():
-    t, evals = DATA("../data/auto93.csv").tree(True)
+    t, evals = DATA("../../data/auto93.csv").tree(True)
     t.show()
     print(evals)
 
 def branch():
-    dataset = DATA("../data/auto93.csv")
+    dataset = DATA("../../data/auto93.csv")
     best, rest, evals = dataset.branch()
     print(l.o(best.mid().cells), l.o(rest.mid().cells))
     print(evals)
@@ -184,7 +186,7 @@ def doubletap():
 
 def bins():
     dataset = DATA("../../data/auto93.csv")
-    best, rest = dataset.branch()[:2]
+    best, rest = dataset.branch()#[:2]
     like = best.rows
     hate = l.slice(l.shuffle(rest.rows), 1, 3 * len(like))
     def score(range):
@@ -247,3 +249,53 @@ def all(bad=0):
         
     sys.stderr.write(f"{'❌ FAIL' if bad > 0 else '✅ PASS'} {bad} fail(s) \n")
     sys.exit(bad)
+
+def sym():
+    sym = SYM()
+    for x in [1, 1, 1, 1, 2, 2, 3]:
+        sym.add(x)
+    mode, e = sym.mid(), sym.div()
+    print(mode, e)
+    return 1.37 < e and e < 1.38 and mode == 1
+
+def norm(mu=0, sd=1):
+    r = random.random()
+    return mu + sd * math.sqrt(-2 * math.log(r)) * math.cos(2 * math.pi * r)
+
+def num():
+    num = NUM()
+    for _ in range(1, 1000): num.add(norm(10, 2))
+
+    mu, sd = num.mid(), num.div()
+
+    print(l.rnd(mu, 3), l.rnd(sd, 3))
+    return 10 < mu and mu < 10.1 and 2 < sd and sd < 2.05
+
+def data():
+    dataset = DATA("../../data/diabetes.csv")
+    n=0
+
+    for i, row in enumerate(dataset.rows):
+        if i % 100 == 0:
+            n += len(row.cells)
+            l.oo(row.cells)
+            print(n)
+    return n == 63
+
+def dist():
+    dataset = DATA("../../data/auto93.csv")
+    r1 = dataset.rows[0]
+    rows = r1.neighbors(dataset)
+
+    for i, row, in enumerate(rows):
+        if i % 30 == 0:
+            print(l.o(row.cells), l.rnd(row.dist(r1, dataset)))
+
+def far():
+    dataset = DATA("../../data/auto93.csv")
+    a, b, C, evals = dataset.farapart(dataset.rows)
+    print(a.cells, b.cells, C)
+   
+
+random.seed(the.seed)
+half()
